@@ -1,9 +1,10 @@
 import cv2
 import time
+import os
 
-name = 'Kim' #replace with your name
 
-def make_headshots():
+def make_headshots(name):
+    #os.mkdir("dataset/" + name)
     cam = cv2.VideoCapture(0, cv2.CAP_V4L)
 
     cv2.namedWindow("press space to take a photo", cv2.WINDOW_NORMAL)
@@ -11,7 +12,7 @@ def make_headshots():
 
     img_counter = 0
     
-    while img_counter < 10:
+    while img_counter < 20:
         ret, frame = cam.read()
         if not ret:
             print("failed to grab frame")
@@ -27,4 +28,4 @@ def make_headshots():
     cam.release()
     cv2.destroyAllWindows()
 
-make_headshots()
+make_headshots("Emanuel")

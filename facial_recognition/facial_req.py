@@ -61,13 +61,18 @@ while True:
 			# loop over the matched indexes and maintain a count for
 			# each recognized face face
 			for i in matchedIdxs:
+				print(data["names"][i])
 				name = data["names"][i]
 				counts[name] = counts.get(name, 0) + 1
-
+			print(counts)
 			# determine the recognized face with the largest number
 			# of votes (note: in the event of an unlikely tie Python
 			# will select first entry in the dictionary)
+			print(max(counts, key=counts.get))
 			name = max(counts, key=counts.get)
+			print(counts[name])
+			if counts[name] <= 15:
+				name = "Unknown"
 
 			#If someone in your dataset is identified, print their name on the screen
 			if currentname != name:

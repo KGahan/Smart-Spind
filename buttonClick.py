@@ -1,13 +1,7 @@
-import RPi.GPIO as GPIO
-import time
+from gpiozero import Button
 
-GPIO.setmode(GPIO.BCM)
-
-GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+button = Button(17)
 
 while True:
-    input_state = GPIO.input(20)
-    if input_state == False:
-        print('Button Pressed')
-        time.sleep(0.2)
-        break
+    if button.is_pressed:
+        print("button is pressed")
