@@ -12,6 +12,7 @@ def initSaveFingerprint(spindId):
     get_fingerprint()
     templateFingerprint()
     saveFingerprint(spindId)
+    return True
 
 def initCheckFingerprint(spindId):
     print("checkFinger")
@@ -57,6 +58,3 @@ def saveFingerprint(location):
     finger.create_model()
     finger.store_model(location)
     print("save")
-
-initSaveFingerprint(2)
-initCheckFingerprint(2)

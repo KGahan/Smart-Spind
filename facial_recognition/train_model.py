@@ -64,6 +64,3 @@ def train_model(name):
 	f = open("encodings.pickle", "wb")
 	f.write(pickle.dumps(data))
 	f.close()
-	
-
-train_model("Kim")

@@ -2,8 +2,8 @@ import cv2
 import time
 import os
 
-
 def make_headshots(name):
+    print("make headshots")
     #os.mkdir("dataset/" + name)
     cam = cv2.VideoCapture(0, cv2.CAP_V4L)
 
@@ -28,4 +28,4 @@ def make_headshots(name):
     cam.release()
     cv2.destroyAllWindows()
 
-make_headshots("Emanuel")
+make_headshots("emanuel")
