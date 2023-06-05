@@ -9,7 +9,7 @@ def recognize_face(target_name):
     # Initialize 'currentname' to trigger only when a new person is identified.
     currentname = "unknown"
     # Determine faces from encodings.pickle file model created from train_model.py
-    encodingsP = "encodings.pickle"
+    encodingsP = "./facial_recognition/encodings.pickle"
 
     # load the known faces and embeddings along with OpenCV's Haar cascade for face detection
     print("[INFO] loading encodings + face detector...")
@@ -41,7 +41,8 @@ def recognize_face(target_name):
             if True in matches:
                 matchedIdxs = [i for (i, b) in enumerate(matches) if b]
                 counts = {}
-
+                print("matches")
+                print(matches)
                 # loop over the matched indexes and maintain a count for each recognized face
                 for i in matchedIdxs:
                     name = data["names"][i]
@@ -49,25 +50,16 @@ def recognize_face(target_name):
 
                 # determine the recognized face with the largest number of votes
                 name = max(counts, key=counts.get)
+                print(name)
+                print(counts[name])
                 if counts[name] <= 15:
                     name = "Unknown"
-
+                print(name)
                 # If the given name is found, return True
-                if name == target_name:
+                if str(name) == str(target_name):
+                    print("found face, return")
+                    vs.stop()
                     return True
 
             # update the list of names
             names.append(name)
-
-        # update the frame
-        vs.update()
-
-    # stop the video stream and do cleanup
-    vs.stop()
-
-#name_to_find = "John Doe"
-#found = recognize_face(name_to_find)
-#if found:
- #   print("Found the name:", name_to_find)
-#else:
- #   print("Could not find the name:", name_to_find)

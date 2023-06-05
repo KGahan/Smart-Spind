@@ -4,7 +4,8 @@ import os
 
 def make_headshots(name):
     print("make headshots")
-    #os.mkdir("dataset/" + name)
+    if not os.path.exists("./facial_recognition/dataset/" + str(name)):
+        os.mkdir("./facial_recognition/dataset/" + str(name))
     cam = cv2.VideoCapture(0, cv2.CAP_V4L)
 
     cv2.namedWindow("press space to take a photo", cv2.WINDOW_NORMAL)
@@ -19,7 +20,7 @@ def make_headshots(name):
             break
         cv2.imshow("press space to take a photo", frame)
         
-        img_name = "dataset/"+ name +"/image_{}.jpg".format(img_counter)
+        img_name = "./facial_recognition/dataset/"+ str(name) +"/image_{}.jpg".format(img_counter)
         cv2.imwrite(img_name, frame)
         print("{} written!".format(img_name))
         img_counter += 1
@@ -27,5 +28,3 @@ def make_headshots(name):
         
     cam.release()
     cv2.destroyAllWindows()
-
-make_headshots("emanuel")

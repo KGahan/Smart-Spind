@@ -10,7 +10,7 @@ import os
 
 def read_pickle():
 	data = []
-	with open("encodings.pickle", "rb") as fr:
+	with open("./facial_recognition/encodings.pickle", "rb") as fr:
 		try:
 			while True:
 				data.append(pickle.load(fr))
@@ -23,7 +23,7 @@ def read_pickle():
 def train_model(name):
 	# our images are located in the dataset folder
 	print("[INFO] start processing faces...")
-	imagePaths = list(paths.list_images("dataset"))
+	imagePaths = list(paths.list_images("./facial_recognition/dataset"))
 	print(imagePaths)
 
 	# initialize the list of known encodings and known names
@@ -61,6 +61,6 @@ def train_model(name):
 	# dump the facial encodings + names to disk
 	print("[INFO] serializing encodings...")
 	data = {"encodings": knownEncodings, "names": knownNames}
-	f = open("encodings.pickle", "wb")
+	f = open("./facial_recognition/encodings.pickle", "wb")
 	f.write(pickle.dumps(data))
 	f.close()

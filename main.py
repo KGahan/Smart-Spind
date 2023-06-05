@@ -25,6 +25,7 @@ def face(spindId):
     print("face")
     make_headshots(spindId)
     train_model(spindId)
+    savedSpind(spindId, "camera")
     print("done")
 
 def finger_or_face(buttonId):
@@ -48,6 +49,14 @@ def spindIsSafed(data, spindId):
     else:
         return False
 
+def deleteSpindFromFile(spindId, data):
+    deletedSpind = list(filter(lambda spind: spind['id'] is not spindId, data))
+    dictDeletedSpind = {"spinds": deletedSpind}
+    json_opject = json.dumps(dictDeletedSpind, indent=4)
+    with open("spind_data.json", "w") as outfile:
+        outfile.write(json_opject)
+
+
 def getSpindStatus(spindId):
     data = getSpindData()
     if len(data["spinds"]) == 0 or not spindIsSafed(data["spinds"], spindId):
@@ -56,7 +65,15 @@ def getSpindStatus(spindId):
         spindData = list(filter(lambda spind: spind['id'] == spindId, data["spinds"]))[0]
         if spindData["method"] == "fingerprint":
             if initCheckFingerprint(spindId):
-                openSchloss()
+                openSchloss(spindId)
+                deleteSpindFromFile(spindId, data["spinds"])
+
+            else:
+                print("not recognized")
+        else:
+            if recognize_face(spindId):
+                openSchloss(spindId)
+                deleteSpindFromFile(spindId, data["spinds"])
             else:
                 print("not recognized")
 
