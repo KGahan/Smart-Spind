@@ -1,15 +1,19 @@
 import RPi.GPIO as GPIO
 import time
+port = 18
 
-GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(21,GPIO.OUT)
-
-GPIO.output(21,False)
+GPIO.setup(port,GPIO.OUT)
 time.sleep(1)
-print("1")
-
-GPIO.output(21, True)
+GPIO.output(port,False)
+print("false")
 time.sleep(1)
-print("2")
-GPIO.output(21, False)
+print("true")
+
+GPIO.output(port, True)
+time.sleep(1)
+print("false")
+GPIO.output(port, False)
+time.sleep(1)
+print("done")
+GPIO.cleanup()
