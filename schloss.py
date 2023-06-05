@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 port1 = 18
-port2 = 18
+port2 = 23
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(port1,GPIO.OUT)
@@ -17,5 +17,5 @@ def openSchloss(spindId):
         
 def openAndClose(port):
     GPIO.output(port, True)
-    time.sleep(1)
+    time.sleep(2)
     GPIO.output(port,False)
